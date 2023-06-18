@@ -1,0 +1,14 @@
+[
+  {
+    "id": "aiuasid",
+    "todo": "Do this 1",
+    "isCompleted": false,
+    "isEditMode": false
+  },
+  {
+    "id": "fverrtj",
+    "todo": "Do this 2",
+    "isCompleted": true,
+    "isEditMode": false
+  }
+]

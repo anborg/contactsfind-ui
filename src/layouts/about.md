@@ -1,0 +1,3 @@
+layouts
+
+Author pulled this convention from Nuxt as well as Laravel. It can be handy to not only define page components but also layout components that can be reused across multiple pages. Instead of defining the contents of the page, as the name suggests, these components define more the general layout. For instance, is it a one column or a 2 column page? Does it have a left sidebar or right sidebar? Does the layout include the typical header and footer or is it a completely blank layout maybe with the page content absolutely centered? Usually there are only 2 or 3 of these layout components but nonetheless they can be handy abstraction to have.

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "baseUrl": "src/",
+    "allowImportingTsExtensions": true,
+    "module": "CommonJS",
+    "strict": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "moduleResolution": "nodenext" // vue module not visible!
+    //other config...
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.json", "**/*.vue", "**/*.js"],
+  "exclude": ["node_modules"]
+}
