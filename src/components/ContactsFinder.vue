@@ -22,8 +22,8 @@ const searchUiState: _UiState = reactive({
 // const url = "https://jsonplaceholder.typicode.com/users"
 
 const fields = ['firstName', 'lastName', 'telephone', 'email', 'jobTitle', 'department', 'commission']
-// const url = 'contacts/find'
-const url = 'http://localhost:8080/contacts/find'
+const url = 'contacts/find'
+// const url = 'http://localhost:8080/contacts/find'
 
 // const contactsResult: Ref<Person[]> = ref([])
 const contactsStore = useContactsStore()

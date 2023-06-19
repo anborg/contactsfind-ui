@@ -28,6 +28,8 @@ https://www.carlrippon.com/fetch-with-async-await-and-typescript/
 - https://codingpr.com/test-your-vue-3-app-with-vitest-and-vue-test-utils/
 - use async in test
 
+Check on : vite app deploy in github pages
+https://dev.to/shashannkbawa/deploying-vite-app-to-github-pages-3ane
 # Check on : yarn enable
 ```sh
 #Package mgr for yarn, available in nodejs
