@@ -22,8 +22,10 @@ const searchUiState: _UiState = reactive({
 // const url = "https://jsonplaceholder.typicode.com/users"
 
 const fields = ['firstName', 'lastName', 'telephone', 'email', 'jobTitle', 'department', 'commission']
-const url = 'contacts/find'
-// const url = 'http://localhost:8080/contacts/find'
+const ENDPOINT_SUFFIX = 'contacts/find'
+// const url = ENDPOINT_SUFFIX
+// const url = 'https://localhost:8080/'+ENDPOINT_SUFFIX
+const url = 'https://wdnvmhba710:8082/' + ENDPOINT_SUFFIX
 
 // const contactsResult: Ref<Person[]> = ref([])
 const contactsStore = useContactsStore()
@@ -31,17 +33,16 @@ const { contacts, isRequestLoading } = storeToRefs(contactsStore)
 
 const reqPostObject: Record<string, any> = ref({})
 watch(searchUiState, () => {
-  searchUiState.invalid = (searchUiState.searchStr.length <3) ? true : false
+  searchUiState.invalid = searchUiState.searchStr.length < 3 ? true : false
   reqPostObject.value = {}
   reqPostObject.value[searchUiState.searchBy] = searchUiState.searchStr
 })
-
 
 const searchContacts = () => {
   RestClient.post<Person[]>(url, reqPostObject.value)
     .then(
       (result) => {
-        let personList :Person[] = result.paresedBody  as Person[]
+        let personList: Person[] = result.paresedBody as Person[]
         contactsStore.setContacts(personList)
         console.log('personList size: ' + personList.length)
       },
