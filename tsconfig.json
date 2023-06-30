@@ -9,6 +9,7 @@
     "noEmit": true,
     "moduleResolution": "nodenext" // vue module not visible!
     //other config...
+
   },
   "files": [],
   "references": [

@@ -1,6 +1,6 @@
 <script lang="ts">
-interface _UiProps {
-  todo: Todo
+interface _UiProps {// just grouping
+  todo: Todo //todo and index are passed from parent TodosView
   index: Number
 }
 </script>
@@ -9,44 +9,62 @@ interface _UiProps {
 import { Icon } from '@iconify/vue'
 import type { Todo } from '../models/todo.model'
 import { ref, watch } from 'vue'
-const uiState = defineProps<_UiProps>()
+//uiProps
+// const { modelValue : _UiProps } = defineModel<_UiProps>()
+const  uiState  = defineProps<_UiProps>()
+const emit = defineEmits<{
+  // (e:'todo-toggle-iscomplete', itemIndex: Number): void,
+  // (e:'todo-edit', itemIndex: Number): void,
+  // (e: 'todo-update', itemIndex: Number): void,
+  (e: 'todo-delete', itemId: string): void
+}>()
+
+//Ui disable/enable based on invalid input
 const invalidInput = ref(true)
 watch(uiState, () => {
-  invalidInput.value = (uiState.todo.todoTxt.length < 3) ? true : false
+  invalidInput.value = uiState.todo.todoTxt.length < 3 ? true : false
 })
-defineEmits(['todo-toggle-iscomplete', 'todo-edit', 'todo-update', 'todo-delete'])
+
+const toggleEditMode = (itemIndex: Number) => {
+  uiState.todo.isEditMode = !uiState.todo.isEditMode
+  //emit('todo-edit', itemIndex)
+}
+const toggleTaskComplete = (itemIndex: Number) => {
+  uiState.todo.isCompleted = !uiState.todo.isCompleted
+  //emit('todo-toggle-iscomplete', uiState.index)
+}
 </script>
 <template>
   <li>
-    <input type="checkbox" :checked="uiState.todo.isCompleted" @input="$emit('todo-toggle-iscomplete', uiState.index)" />
+    <input type="checkbox" :checked="uiState.todo.isCompleted" @input="toggleTaskComplete(uiState.index)" />
     <div class="todo">
       <div v-if="uiState.todo.isEditMode" class="input-wrap" :class="{ 'input-err': invalidInput }">
-        <input id="todoEditField"  type="text" v-model="uiState.todo.todoTxt" />
+        <input v-model="uiState.todo.todoTxt" id="todoEditField" type="text"  />
       </div>
-        <span v-else :class="{ 'completed-todo': uiState.todo.isCompleted }">{{ uiState.todo.todoTxt }} </span>
-      
+      <span v-else :class="{ 'completed-todo': uiState.todo.isCompleted }">{{ uiState.todo.todoTxt }} </span>
     </div>
     <div class="todo-actions">
       <!--
                 Display this button, so once edit-DONE, user can click 
                 When this check-circle is clicked Editing is done. toggle isEditing -->
+      <!-- eligible to save edits: -->
       <Icon
-        v-if="uiState.todo.isEditMode==true && invalidInput==false "
+        v-if="uiState.todo.isEditMode == true && invalidInput == false"
         icon="ph:check-circle"
         class="icon"
         color="green"
         width="22"
-        @click="$emit('todo-edit', uiState.index)"
+        @click="toggleEditMode(uiState.index)"
       />
       <!-- 
                 Display Edit-pencil button so users can edit in text -->
       <Icon
-        v-if="uiState.todo.isEditMode==false"
+        v-if="uiState.todo.isEditMode == false"
         icon="ph:pencil-fill"
         class="icon"
         color="green"
         width="22"
-        @click="$emit('todo-edit', uiState.index, uiState.todo.todoTxt)"
+        @click="toggleEditMode(uiState.index)"
       />
 
       <Icon icon="ph:trash" class="icon" color="f95e5e" width="22" @click="$emit('todo-delete', uiState.todo.id)" />
@@ -82,27 +100,27 @@ li {
     }
   }
   .input-wrap {
-  display: flex;
-  transition: 250ms ease;
-  border: 2px solid #41b080;
+    display: flex;
+    transition: 250ms ease;
+    border: 2px solid #41b080;
 
-  &.input-err {
-    border-color: red;
-  }
-  &:focus-within {
-    box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1);
-  }
+    &.input-err {
+      border-color: red;
+    }
+    &:focus-within {
+      box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1);
+    }
 
-  input {
-    width: 100%;
-    padding: 8px 6px;
-    border: none;
+    input {
+      width: 100%;
+      padding: 8px 6px;
+      border: none;
 
-    &:focus {
-      outline: none;
+      &:focus {
+        outline: none;
+      }
     }
   }
-}
 
   .todo {
     flex: 1;

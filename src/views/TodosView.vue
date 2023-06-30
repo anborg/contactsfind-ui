@@ -10,23 +10,24 @@ import TodoItem from '../components/TodoItem.vue'
 import { useTodosStore } from '../stores/TodosStore.ts'
 import { storeToRefs } from 'pinia'
 const todosStore = useTodosStore()
+
 const { todos, isRequestLoading } = storeToRefs(todosStore)
 //const todoList: Ref<Todo[]> = ref([]) //reactive(items: [])
-const toggleTodoComplete = (todoPos: number) => {
-  todosStore.toggleComplete(todoPos)}
+// const toggleTodoComplete = (todoPos: number) => {
+//   todosStore.toggleComplete(todoPos)}
 
-const toggleEditTodo = (todoPos: number) => {
-  todosStore.toggleEdit(todoPos)
+// const toggleEditTodo = (todoPos: number) => {
+//   todosStore.toggleEdit(todoPos)
 
-}
+// }
 
 //TODO unused
-const updateTodo = (todoPos: number, todoVal: string) => {
-  todosStore.update(todoPos,todoVal)
-}
+// const updateTodo = (todoPos: number, todoVal: string) => {
+//   todosStore.update(todoPos,todoVal)
+// }
 const deleteTodo = (todoId: string) => {
   todosStore.deleteTodo(todoId)
-  }
+}
 </script>
 
 <template>
@@ -40,9 +41,6 @@ const deleteTodo = (todoId: string) => {
         :key="index"
         :todo="todo"
         :index="index"
-        @todo-toggle-iscomplete="toggleTodoComplete"
-        @todo-edit="toggleEditTodo"
-        @todo-update="updateTodo"
         @todo-delete="deleteTodo"
       />
     </ul>

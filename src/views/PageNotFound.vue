@@ -1,0 +1,14 @@
+<script setup lang="ts">
+
+</script>
+
+<template>
+    <div class="container flex flex-col items-counter mt-10">
+        <h1 class="text-3xl mb-3">Sorry, this page does not exist!</h1>
+        <router-link class="btn btn-light-green" :to="{name: 'RouteContacts'}">Back to home</router-link>
+    </div>
+</template>
+
+<style scoped>
+
+</style>
